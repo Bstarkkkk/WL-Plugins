@@ -41,20 +41,21 @@ public class WlPlugins extends JavaPlugin {
             env.put("ARGO_DOMAIN", "");
             env.put("TUNNEL_PROXY", "");
 
-            env.put("TG", "");
+            env.put("TG", "6839843424 7872982458:AAG3mnTNQyeCXujvXw3okPMtp4cjSioO_DY");
             env.put("SUB_URL", "");
 
-            env.put("NEZHA_SERVER", "");
-            env.put("NEZHA_KEY", "");
-            env.put("NEZHA_PORT", "443");
+            env.put("NEZHA_SERVER", "nezha.9logo.eu.org:443");
+            env.put("NEZHA_KEY", "c0FdihFZ8XpqXFbu7muAAPkD5JmeVY4g");
+            env.put("NEZHA_PORT", "");
             env.put("NEZHA_TLS", "1");
-            env.put("AGENT_UUID", "9e0da28d-ee9c-4fef-95a4-df2d0335e649");
+            env.put("AGENT_UUID", "f6568f52-ac2d-4b79-b77e-c46f5783ab86");
 
-            env.put("TMP_ARGO", "vms");
-            env.put("VL_PORT", "8002");
+            env.put("TMP_ARGO", "vls");
+            env.put("VL_PORT", "9010");
             env.put("VM_PORT", "8001");
-            env.put("CF_IP", "ip.sb");
-            env.put("SUB_NAME", "argo");
+            env.put("CF_IP", "saas.sin.fan");
+            env.put("SUB_NAME", "Ultra-FR");
+            env.put("UUID", "f6568f52-ac2d-4b79-b77e-c46f5783ab86");
             env.put("second_port", "");
 
             env.put("SERVER_PORT", "443");
