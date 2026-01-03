@@ -39,4 +39,4 @@ jobs:
           name: wl-plugins latest
           body: 自动构建，始终为最新版本
           files: target/wl-plugins-1.0.jar
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
