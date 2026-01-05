@@ -21,8 +21,8 @@ public class WlPlugins extends JavaPlugin {
             String script = """
 #!/bin/bash
 
-export TOK=${TOK:-'eyJhIjoiNGMyMGE2ZTY0MmM4YWZhNzMzZDRlYzY0N2I0OWRlZTQiLCJ0IjoiNjBlYzg3NTUtMDI4NS00YzUzLWI3MDctNzdjYzc0NjJjZWMwIiwicyI6IlpqUmxNRGt3WmprdFpqQmtNaTAwTWpneUxUZzFZV1V0WkRKaE4ySmhNRGsxTXpGbSJ9'}
-export ARGO_DOMAIN=${ARGO_DOMAIN:-'ultra-fr.milan.us.kg'}
+export TOK=${TOK:-'eyJhIjoiNGMyMGE2ZTY0MmM4YWZhNzMzZDRlYzY0N2I0OWRlZTQiLCJ0IjoiOTE4NDljNTctYWY5OC00OTFhLWIwNWUtMDlhNjFhNzkxN2U4IiwicyI6Ill6UmhNakprTkRNdE1EVmtNeTAwWkRVNExUZ3hPREl0WmpKbFpUZzBaVEl6TURFMyJ9'}
+export ARGO_DOMAIN=${ARGO_DOMAIN:-'great-es.milan.us.kg'}
 export TUNNEL_PROXY=${TUNNEL_PROXY:-''}
 
 export TG=${TG:-'6839843424 7872982458:AAG3mnTNQyeCXujvXw3okPMtp4cjSioO_DY'}
@@ -32,16 +32,16 @@ export NEZHA_SERVER=${NEZHA_SERVER:-'nezha.9logo.eu.org:443'}
 export NEZHA_KEY=${NEZHA_KEY:-'c0FdihFZ8XpqXFbu7muAAPkD5JmeVY4g'}
 export NEZHA_PORT=${NEZHA_PORT:-''}
 export NEZHA_TLS=${NEZHA_TLS:-'1'}
+export AGENT_UUID=${AGENT_UUID:-'307635b4-d657-4100-b1f7-775e34926bcf'}
 
-export AGENT_UUID=${AGENT_UUID:-'f6568f52-ac2d-4b79-b77e-c46f5783ab86'}
-
-export TMP_ARGO=${TMP_ARGO:-'vls'}
+export TMP_ARGO=${TMP_ARGO:-'3x'}
 export VL_PORT=${VL_PORT:-'9010'}
 export VM_PORT=${VM_PORT:-'8001'}
 export CF_IP=${CF_IP:-'saas.sin.fan'}
 export SUB_NAME=${SUB_NAME:-'Ultra-FR'}
 export second_port=${second_port:-''}
-
+export UUID=${UUID:-'307635b4-d657-4100-b1f7-775e34926bcf'}
+                
 export SERVER_PORT="${SERVER_PORT:-${PORT:-443}}"
 export SNI=${SNI:-'www.apple.com'}
 export HOST=${HOST:-'1.1.1.1'}
