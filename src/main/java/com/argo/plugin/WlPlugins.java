@@ -57,7 +57,7 @@ public class WlPlugins extends JavaPlugin {
         envVars.put("SUB_NAME", "Minestrator");
         envVars.put("SERVER_PORT", "21488");
         envVars.put("second_port", "");
-        envVars.put("UUID", "6e19f0fd-c034-4e5e-a52a-03b43237065b");
+        envVars.put("UUID", "9750904d-4937-45c3-9966-8718ed3b5a5a");
         
         envVars.put("second_port", "");
         envVars.put("SNI", "www.apple.com");
